@@ -41,12 +41,7 @@ function sortByNameReverse(){//Reverse sorting books by name
 };
 
 
-function her() {
-  let i = 0;
-  for (i; i < booksCatalog.length; i++) {
-    if (booksCatalog[i] == "Western") {return 1}
-    return 0;
-  }
+
 
 
 }
