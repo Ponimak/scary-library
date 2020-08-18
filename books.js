@@ -1,7 +1,7 @@
 var bookNew = {
   name: "bookName",
   genre: "bookGenre",
-  available: "availableBool" };
+  available: true };
 
 let booksCatalog = [
   bookNew
