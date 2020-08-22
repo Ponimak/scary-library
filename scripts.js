@@ -1,13 +1,28 @@
-function showCatalog() { //Function that displays all the books
+'use strict';
+
+//Displaying functions
+function showCatalog() { //Function that displays all books
   let i = 0;
-  let x;
   let text = "";
   for (i; i < booksCatalog.length; i++) {
     text += booksCatalog[i].name + " " + booksCatalog[i].genre + "<br>";
   };
-  document.getElementById("demo2").innerHTML = text;};
+  document.getElementById("demo2").innerHTML = text;
+  document.getElementById("head").innerHTML = "Books";
+};
 
 
+  function showClients() {//Functions that displays all clients
+    let i = 0;
+    let text = "";
+    for (i; i < clients.length; i++) {
+      text += clients[i].fullName() + "<br>";
+    };
+    document.getElementById("demo2").innerHTML = text;
+    document.getElementById("head").innerHTML = "Clients";
+  };
+
+//"Add a new item" functions
   function addBook(bookName, bookGenre) {//Adds a new book to catalog
     booksCatalog.push({
       name: bookName,
@@ -16,8 +31,19 @@ function showCatalog() { //Function that displays all the books
   };
 
 
+  function addClient(firstName, lastName) {//Adds a new client record
+    clients.push( {
+      firstName: firstName,
+      lastName: lastName,
+      haveBook: "" || "No rents",
+      fullName: function() {return this.firstName + " " + this.lastName;}
+      });
+      sortClientsByName();
+  };
+
+
 //Sorting functions
-function sortByName(){//Sorting books by name
+function sortBooksByName(){//Sorting books by name
   booksCatalog.sort(function(a, b){
     let x = a.name.toLowerCase();
     let y = b.name.toLowerCase();
@@ -29,7 +55,7 @@ function sortByName(){//Sorting books by name
 };
 
 
-function sortByNameReverse(){//Reverse sorting books by name
+function sortBooksByNameReverse(){//Reverse sorting books by name
   booksCatalog.sort(function(a, b){
     let x = a.name.toLowerCase();
     let y = b.name.toLowerCase();
@@ -41,16 +67,15 @@ function sortByNameReverse(){//Reverse sorting books by name
 };
 
 
+function sortClientsByName() {
+  clients.sort(function(a, b) {
+    let x = a.firstName.toLowerCase();
+    let y = b.firstName.toLowerCase();
+    if (x > y) {return 1;}
+    if (x < y) {return -1;}
+    return 0;
+  });
+};
 
 
-
-}
-
-
-function show() {
-let x;
-let text = "";
-for (x in bookNew) {
-  text += bookNew[x] + ", ";
-}
-document.getElementById("demo1").innerHTML = text;}
+//Manipulate client-book relations
