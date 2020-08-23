@@ -27,7 +27,8 @@ function showCatalog() { //Function that displays all books
     booksCatalog.push({
       name: bookName,
       genre: bookGenre,
-      available: true});
+      owner:""
+    });
   };
 
 
@@ -35,7 +36,7 @@ function showCatalog() { //Function that displays all books
     clients.push( {
       firstName: firstName,
       lastName: lastName,
-      haveBook: "" || "No rents",
+      haveBook: "",
       fullName: function() {return this.firstName + " " + this.lastName;}
       });
       sortClientsByName();
@@ -79,3 +80,28 @@ function sortClientsByName() {
 
 
 //Manipulate client-book relations
+function assignBook(clientFullName, bookName) {//Assigns book to client
+  let i = 0;
+  outer: for (i; i < clients.length; i++) {
+    if (clients[i].fullName() == clientFullName) {
+      clients[i].haveBook = bookName;
+      break outer;
+    };
+  };
+};
+
+function changeBookOwner(clientFullName, bookName) {//Assigns client to book
+  let i = 0;
+  outer: for (i; i < booksCatalog.length; i++) {
+    if (booksCatalog[i].name == bookName) {
+      booksCatalog[i].owner = clientFullName;
+      break outer;
+    };
+  };
+};
+
+function rent(clientFullName, bookName) {
+  assignBook(clientFullName, bookName);
+  changeBookOwner(clientFullName, bookName);
+  return "Rent successful";
+};
